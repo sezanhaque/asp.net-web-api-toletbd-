@@ -1,0 +1,68 @@
+﻿@model ToLetBdEntity.Post
+
+@{
+    Layout = "~/Views/Shared/_HouseOwnerLayout.cshtml";
+    var user = (ToLetBdEntity.User)Session["user"];
+}
+
+<div class="col-md-9"> 
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">New Post</div>
+      <div class="panel-body">
+        @using (Html.BeginForm("NewPost", "HouseOwner", FormMethod.Post, new {enctype="multipart/form-data" }))
+        { 
+             @Html.ValidationSummary(true)
+
+            @Html.TextBoxFor(model => model.Title, new { @class = "form-control", PlaceHolder="Enter Post Title" }) <br />
+             @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            @Html.TextAreaFor(model => model.ShortDesc, new { @class = "form-control", PlaceHolder="Enter Short Description" }) <br />
+             @Html.ValidationMessageFor(model => model.ShortDesc, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(model => model.Address, new { @class = "form-control", PlaceHolder="Enter Address" }) <br />
+             @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            
+            <div class="row">
+                <div class="col-md-12"> 
+
+                    <div class="row"> 
+
+                        <div class="col-md-6 container"> 
+                            @Html.TextBoxFor(model => model.RoomRent, new { @class = "form-control", PlaceHolder="Enter Rent" }) <br />
+                             @Html.ValidationMessageFor(model => model.RoomRent, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6"> 
+                             @Html.TextBoxFor(model => model.NoOfRoom, new { @class = "form-control", PlaceHolder="Enter No Of Room" }) <br />
+                             @Html.ValidationMessageFor(model => model.NoOfRoom, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12"> 
+
+                    <div class="row"> 
+
+                        
+                       
+
+                        <div class="col-md-6 container"> 
+                            <label for="input-1">Upload Images</label>
+                        </div>
+                        <div class="col-md-6"> 
+                             <input id="input-1" type="file" multiple="multiple"  name="files" class="file" data-show-upload="false"  data-show-preview="false" > <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="Publish Post" class="btn btn-primary" /><br />
+             if (TempData["msg"] != null)
+              { 
+                 <p class="alert alert-info">@TempData["msg"]</p>
+              }
+            
+            
+        }
+      </div>
+    </div>
+</div>

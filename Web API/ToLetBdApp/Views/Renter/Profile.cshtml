@@ -1,0 +1,70 @@
+﻿@model ToLetBdEntity.User
+
+@{
+
+    Layout = "~/Views/Shared/_RenterLayout.cshtml";
+   var user = (ToLetBdEntity.User)Session["user"];
+}
+
+<div class="col-md-9 col-sm-12">
+	
+	<div class="panel panel-info" >
+        <div class="panel-heading">
+            <div class="panel-title"> Profile </div>
+        </div> 
+	    <div class="panel-body">
+	   		 
+            <div class="row">
+                 @using (Html.BeginForm("Profile", "HouseOwner", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                 { 
+                               @Html.ValidationSummary(true)
+                    <div class="col-md-4">
+                        
+                        @if (String.IsNullOrEmpty(user.ImgPath))
+                        {
+                             <img src="~/Content/Images/propic.jpg" class="img-rounded img-responsive" alt="Profile Photo"  />
+                            
+                        }else{
+                           <img src="~/Content/Images/@user.ImgPath" class="img-rounded img-responsive" alt="Profile Photo"  />
+                        }
+                         
+                         <input name="photo" id="photo" type="file"/>
+                    </div>
+
+                	<div class="col-md-8">
+                        <div class="wrapper">
+                                       
+                             @Html.TextBoxFor(model => model.Id, new { @class = "form-control", Value = @user.Id.ToString(), type = "hidden" })
+                             @Html.TextBoxFor(model => model.Password, new { @class = "form-control", Value = @user.Password.ToString(), type = "hidden" })
+                             @Html.TextBoxFor(model => model.Name, new { @class = "form-control", Value = @user.Name.ToString(), PlaceHolder = "Name" }) <br />
+                             @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                             @Html.TextBoxFor(model => model.Email, new { @class = "form-control", Value = @user.Email.ToString(), PlaceHolder = "Email" }) <br />
+                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                             @Html.TextBoxFor(model => model.PhnNo, new { @class = "form-control", Value = @user.PhnNo, PlaceHolder = "Phone number" }) <br />
+                             @Html.ValidationMessageFor(model => model.PhnNo, "", new { @class = "text-danger" })
+                            
+
+                            <button class="btn btn-sm btn-primary btn-block" type="submit">Update Profile</button>
+                            
+                             
+                          
+                              @if (TempData["msg"] != null)
+                              { 
+                                <p class="alert alert-info">@TempData["msg"]</p>
+                              }
+                            
+                         
+                         </div>
+                	</div>
+                 }
+                
+
+                
+            </div>
+
+		</div>
+	
+	</div>
+</div>
+
+

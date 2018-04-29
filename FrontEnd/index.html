@@ -1,0 +1,138 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+    <title>To Let Bd | Home</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="home.js"></script>
+
+	
+</head>
+<body>
+
+  <script type="text/javascript"> 
+      $(function(){
+
+        if(sessionStorage.user!=null){
+
+          var user = JSON.parse(sessionStorage.user);
+          if(user!=null){
+
+              if(user.UserTypeId==1){
+                $('#homeTopRight').html('<li><a href="admin.html"><span class="glyphicon glyphicon-log-in"></span> Dashboard</a></li>');
+              }else if(user.UserTypeId==2){
+                $('#homeTopRight').html('<li><a href="houseOwner.html"><span class="glyphicon glyphicon-log-in"></span> Dashboard</a></li>');
+              }
+
+          }else{
+            $('#homeTopRight').html('<li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>');
+          }
+
+        }
+          
+
+
+      $("body").delegate('.viewBtn', 'click', function(){
+
+        var pid = $(this).val();
+          $.ajax({ 
+              url: 'http://localhost:2532/api/posts/'+pid,
+              type: 'GET',
+                complete: function(xmlhttp, status) {
+                  if(xmlhttp.status==200){
+                    
+                    var postList = xmlhttp.responseJSON;
+                    var outputStr='<div class="panel panel-success"><div class="panel-heading"><strong>'+postList.Title+'</strong></div><div class="panel-body"><div class="col-md-12"><div class="row"><div class="col-md-12"><p style="width:100%;"><strong>Short Description: </strong>'+postList.ShortDesc+'</p></div><div class="col-md-6"> <div class="row"><div class="col-md-12"><p style="width:100%;"><strong>No of Room: '+postList.NoOfRoom+'</strong></p><hr /></div><div class="col-md-12"><p style="width:100%;"><strong>House Rent: '+postList.RoomRent+' tk</strong></p><hr /></div><div class="col-md-12"><strong>Status: '+postList.Status+'</strong><hr /></div></div></div></div></div><div class="col-md-12"><div class="row"><div class="col-md-12"><strong>Address: '+postList.Address+'</strong></div><div class="col-md-12"><hr /><div class=" col-md-6"><div class="row"><div class="col-md-4"><a href="index.html" style="text-decoration:none;"><button style="width:100%;" type="button" value="'+postList.Id+'" class="btn btn-success viewBtn">Back</button></a></div></div></div></div></div></div></div></div>';
+
+                      $('#homeAllPost').html(outputStr);
+
+                  }
+                    
+                }
+            });
+      });
+
+
+      });
+  </script>
+
+	<div class="container">
+		
+		<nav style="background-color: #fff;border-color: #1e88e5;border-width: 2px; text-decoration-color:#fff;" class="navbar navbar-theme main-menu">
+
+	        <div class="container-fluid">
+	            
+	            <div class="navbar-header">
+	            	<div class="col-md-12">
+	            		<a style="text-decoration:none;" href="index.html"><h1 style="font-size:50px;">To Let BD</h1></a>
+	            	</div>
+	            </div>
+
+	            
+			    <ul id="homeTopRight" class="nav navbar-nav navbar-right">
+			      
+                        <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			      
+			    </ul>
+	               
+
+	        </div>
+		</nav>
+		<div class="Main_body">
+			<div class="row">
+				
+
+			      
+
+<div class="col-md-12"> 
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">All Posts</div>
+      <div class="panel-body">
+
+          <div class="panel panel-default"> 
+              <div class="panel-body"> 
+                  <div class="col-md-12 col-sm-12">
+                                           
+                         <div class="col-md-8">
+                             <input type="text" id="PostAreaBox" name="address" class="form-control" placeholder="Search by specific area..."/>   
+                
+                          </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-md btn-primary btn-block" id="searchPostBtn" type="submit">Search</button> 
+                        </div>
+                                     
+
+                  </div>
+              </div>
+          </div>
+
+          <div id="homeAllPost"> 
+
+          </div>
+
+
+          
+      </div>
+    </div>
+</div>
+
+
+				
+			</div>
+		</div>
+	</div>
+
+  
+
+	
+	
+	
+
+</body>
+</html>
+

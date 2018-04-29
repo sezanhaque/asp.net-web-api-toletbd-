@@ -1,0 +1,86 @@
+﻿@model ToLetBdEntity.Post
+
+@{
+    ViewBag.Title = "CurrentPost";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-md-9"> 
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">Published Posts</div>
+      <div class="panel-body">
+          @if (TempData["msg"] != null)
+            { 
+            <p class="alert alert-danger">@TempData["msg"]</p>
+            }
+
+           @foreach(var post in ViewBag.allposts ){
+          <div class="panel panel-success">
+              <div class="panel-heading"><strong>@post.Title</strong></div>
+              <div class="panel-body"> 
+                 
+                  
+
+                  <div class="col-md-12"> 
+                      <div class="row"> 
+                          <div class="col-md-6"> 
+                              <div class="row"> 
+                                  <div class="col-md-6">
+                                      <p style="width:100%;"><strong>No of Room: @post.NoOfRoom</strong></p>
+                                   </div>
+                                  <div class="col-md-6">
+                                      <p style="width:100%;"><strong>House Rent: @post.RoomRent tk</strong></p>
+                                   </div>
+                              </div>
+                          </div>
+                          <div class="col-md-6"> 
+
+                              <textarea style="width:100%;">@post.ShortDesc</textarea>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <div class="col-md-12">
+                      <div class="row"> 
+                          <hr />
+
+                          <div class="col-md-12"> 
+                              <div class="col-md-8"><strong>Address: @post.Address</strong></div>
+                              <div class="col-md-4"><strong>Status: @post.Status</strong></div>
+                             
+                          </div>
+                          
+                          <div class="col-md-12"> 
+                              <hr />
+                              <div class="col-md-offset-3 col-md-6"> 
+                              
+                                  <div class="col-md-4">
+                                      <a href="/Admin/DeletePost/@post.Id" style="text-decoration:none;">
+                                          <button style="width:100%;" type="button" class="btn btn-danger">Delete</button>
+                                      </a> 
+                                  </div>
+                                  
+                                  <div class="col-md-4">
+                                      <a href="/Admin/DesablePost/@post.Id" style="text-decoration:none;">
+                                          <button style="width:100%;" type="button" class="btn btn-warning">Desable</button>
+                                      </a> 
+                                  </div>
+
+                                  <div class="col-md-4">
+                                      <a href="/Admin/ViewPost/@post.Id" style="text-decoration:none;">
+                                          <button style="width:100%;" type="button" class="btn btn-success">View</button>
+                                      </a> 
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+              </div>
+          </div>
+           }
+      </div>
+    </div>
+</div>
+

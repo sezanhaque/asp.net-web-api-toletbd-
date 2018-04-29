@@ -1,0 +1,100 @@
+﻿@model ToLetBdEntity.User
+
+@{
+    Layout = null;
+
+    List<SelectListItem> listItems = new List<SelectListItem>();
+
+    foreach (var userTypes in ViewBag.userTypes)
+    {
+       if(userTypes.Id>1){
+           
+           listItems.Add(new SelectListItem
+           {
+               Text = userTypes.TypeName.ToString(),
+               Value = userTypes.Id.ToString()
+           });
+       }
+    }
+    
+   
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <div class="container">
+
+        <div class="row"> 
+            <div class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2 form-horizontal" style="margin-top:100px;" >  
+
+                <div class="panel panel-primary">
+                  <div class="panel-heading">Registration</div>
+                  <div class="panel-body">
+                      <div class="col-md-12">
+                          @using (Html.BeginForm("Index", "Registration", FormMethod.Post))
+                            { 
+                            @Html.ValidationSummary(true)
+
+                  
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder="Name"})
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })<br />
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder="Email"})
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", name="eamiladd" })<br />
+                            
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder="Password"})
+                              @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })<br />
+                            @Html.TextBoxFor(model => model.PhnNo, new { @class = "form-control", placeholder="Phnone Number"})
+                              @Html.ValidationMessageFor(model => model.PhnNo, "", new { @class = "text-danger" })<br />
+                          <div class="col-md-12">
+                              <div class="row">
+                                  @Html.Label("Gender: ") 
+                                  Male @Html.RadioButton("Gender","male",true)
+                                  Female @Html.RadioButton("Gender","female")
+                              </div>
+                          </div>
+                              
+                             
+                          
+                          <div class="col-md-12"> 
+                                
+                              <div class="row"> 
+                                  <br />
+                                  @Html.DropDownListFor(model => model.UserTypeId, listItems, "-- Select Account Type --",new { @class = "form-control"} ) 
+                                  @Html.ValidationMessageFor(model => model.UserTypeId, "", new { @class = "text-danger" }) <br />
+                              </div>
+                                    
+                            
+                          </div>
+               
+
+                          <button class="btn btn-sm btn-success btn-block" type="submit">Confirm Registration</button>  <br />
+                
+                            }
+
+                          <a href="/Login" style="text-decoration:none"><button class="btn btn-sm btn-danger btn-block" type="submit">Back To Login</button></a>
+                 
+                       </div>
+
+                  </div>
+                </div>
+               </div>
+            </div>
+
+        </div>
+
+</body>
+</html>
+
+    
+
+                               

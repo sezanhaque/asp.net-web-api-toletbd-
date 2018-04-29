@@ -1,0 +1,55 @@
+﻿@model ToLetBdEntity.User
+
+@{
+
+    Layout = "~/Views/Shared/_RenterLayout.cshtml";
+}
+
+<div class="col-md-9 col-sm-12">
+	
+	<div class="panel panel-info" >
+        <div class="panel-heading">
+            <div class="panel-title"> Settings </div>
+        </div> 
+	    <div class="panel-body">
+	   		 
+            <div class="row">
+
+            	<div class="col-md-6">
+                    <div class="wrapper">
+                           
+                           @using (Html.BeginForm("Settings", "Admin", FormMethod.Post))
+                           { 
+                               @Html.ValidationSummary(true)
+                           
+                      
+
+                            
+                            @Html.PasswordFor(model => model.Id,new { @class = "form-control", value=@ViewBag.admin.Id, name="Id", type="hidden"}) <br />
+                            @Html.PasswordFor(model => model.Password,new { @class = "form-control", value=@ViewBag.admin.Password }) <br />
+                            <input type="password" class="form-control" name="Newpassword" placeholder="New Password"/> <br />
+                            
+                            <input type="password" class="form-control" name="cpassword" placeholder="Confirm Password"/> <br />
+                            
+                       
+
+                            
+                            <input type="submit" value="Change Password" class="btn btn-primary" /><br />
+                           
+                               if (TempData["msg"] != null) { 
+                                <p class="alert alert-info">@TempData["msg"]</p>
+                               }
+                             
+                        
+                           }
+                       
+                    </div>
+            	</div>
+                
+            </div>
+
+		</div>
+	
+	</div>
+</div>
+

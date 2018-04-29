@@ -1,0 +1,113 @@
+﻿@model ToLetBdEntity.User
+
+@{
+   
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    
+    
+}
+
+<div class="col-md-9 col-sm-12">
+	
+	<div class="panel panel-info" >
+        <div class="panel-heading">
+            <div class="panel-title">All Users </div>
+        </div> 
+	    <div class="panel-body">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                  <div class="col-md-6 col-sm-12">
+                 @using (Html.BeginForm("SearchUsers", "Admin", FormMethod.Post ))
+                 { 
+                          <div class="col-md-8">
+                              <select class="form-control" name="userTypeId" >
+                                <option value="0">Search By User Type</option>
+                                @foreach(var userType in ViewBag.alluserTypes){
+                                <option value="@userType.Id">@userType.TypeName</option>
+                                }
+                                
+                              </select>
+                          </div>
+                          <div class="col-md-4">
+                              <button class="btn btn-md btn-primary btn-block" type="submit">Search</button> 
+                          </div>
+                      }
+                  </div>
+              </div>
+            </div>
+             @if (TempData["msg"] != null)
+                { 
+                <p class="alert alert-info">@TempData["msg"]</p>
+                }
+            @foreach(var usr in ViewBag.allusers){
+            	<div class="panel panel-default">
+                  <div class="panel-body">
+                    <div class="row">
+                            <div class="col-md-2 col-sm-12">
+                                @if(String.IsNullOrEmpty(usr.ImgPath)){
+                                    <img src="~/Content/Images/propic.jpg" class="img-rounded img-responsive" style="height: 100px; width: 100px;" alt="Profile Photo" /> <br>
+                                    <p><span style="font-size: 16px; font-weight: bold;">Profile Photo</span></p>
+                                    
+                                }else{
+                                    <img src="~/Content/Images/@usr.ImgPath" class="img-rounded" style="height: 100px; width: 100px;" alt="Profile Photo"  /> <br>
+                                    <p><span style="font-size: 16px; font-weight: bold;">Profile Photo</span></p>
+                                }
+                            </div>
+                            <div class="col-md-10 col-sm-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p><span style="font-size: 16px; font-weight: bold;">Id: </span>@usr.Id</p>
+                                             </div>
+                                            <div class="col-md-12">
+                                                <p><span style="font-size: 16px; font-weight: bold;">Name: </span>@usr.Name</p>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <p><span style="font-size: 16px; font-weight: bold;">Email: </span>@usr.Email</p>
+                                            </div>
+                                        </div>
+                                     </div>
+
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p><span style="font-size: 16px; font-weight: bold;">Gender: </span>@usr.Gender</p>
+                                            </div>
+                                           @{
+                                                 ToLetBdRepository.UserTypeRepository usertRepo = new ToLetBdRepository.UserTypeRepository();
+                                                ToLetBdEntity.UserType ut = usertRepo.Get(usr.UserTypeId);
+                                             }
+                                          
+                                            <div class="col-md-12">
+                                                <p><span style="font-size: 16px; font-weight: bold;">User Type: @ut.TypeName</span></p>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2 col-sm-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <a href="/Admin/DeleteUsers/@usr.Id" style="text-decoration:none;">
+                                                   <button type="button" class="btn btn-danger">Delete</button>
+                                                </a>   
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+ 
+                            </div>
+                    </div>
+                     
+                  </div>
+                </div>
+
+            }
+
+            
+
+		</div>
+	
+	</div>
+</div>

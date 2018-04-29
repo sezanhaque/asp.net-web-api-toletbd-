@@ -1,0 +1,81 @@
+﻿@model ToLetBdEntity.Post
+
+@{
+    ViewBag.Title = "EditPost";
+    Layout = "~/Views/Shared/_HouseOwnerLayout.cshtml";
+}
+
+
+
+<div class="col-md-9"> 
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">New Post</div>
+      <div class="panel-body">
+        @using (Html.BeginForm("EditPost", "HouseOwner", FormMethod.Post ))
+        { 
+             @Html.ValidationSummary(true)
+            
+            @Html.TextBoxFor(model => model.Id, new { @class = "form-control", PlaceHolder="Enter Post Title", Value =@ViewBag.post.Id.ToString(), type = "hidden" }) <br />
+            @Html.Label("Title:")
+            @Html.TextBoxFor(model => model.Title, new { @class = "form-control", PlaceHolder="Enter Post Title", Value =@ViewBag.post.Title.ToString()}) <br />
+             @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger"})
+            @Html.Label("Description:")
+            @Html.TextAreaFor(model => model.ShortDesc ,new { @class = "form-control ShortDesc", PlaceHolder="Enter Short Description"}) <br />
+             @Html.ValidationMessageFor(model => model.ShortDesc, "", new { @class = "text-danger" })
+            @Html.Label("Address")
+            @Html.TextBoxFor(model => model.Address, new { @class = "form-control", PlaceHolder="Enter Address",Value =@ViewBag.post.Address.ToString() }) <br />
+             @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+
+            <script type="text/javascript">
+                $(function () {
+                    $("#ShortDesc").html("@ViewBag.post.ShortDesc.ToString()");
+                });
+            </script>
+            
+            <div class="row">
+                <div class="col-md-12"> 
+
+                    <div class="row"> 
+
+                        <div class="col-md-6 container"> 
+                            @Html.Label("Rent: ")
+                            @Html.TextBoxFor(model => model.RoomRent, new { @class = "form-control", PlaceHolder="Enter Rent",Value =@ViewBag.post.RoomRent.ToString() }) <br />
+                             @Html.ValidationMessageFor(model => model.RoomRent, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6"> 
+                            @Html.Label("No Of Room: ")
+                             @Html.TextBoxFor(model => model.NoOfRoom, new { @class = "form-control", PlaceHolder="Enter No Of Room",Value =@ViewBag.post.NoOfRoom.ToString()  }) <br />
+                             @Html.ValidationMessageFor(model => model.NoOfRoom, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12"> 
+
+                    <div class="row"> 
+
+                        
+                       
+
+                        
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="Update Post" class="btn btn-primary" /><br />
+             if (TempData["msg"] != null)
+              { 
+                 <p class="alert alert-info">@TempData["msg"]</p>
+              }
+            
+            
+        }
+      </div>
+    </div>
+</div>
+
+
+
+

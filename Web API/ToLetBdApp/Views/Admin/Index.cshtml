@@ -1,0 +1,61 @@
+﻿@{
+   
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="col-md-9"> 
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">Dashboard</div>
+      <div class="panel-body">
+          <div class="col-md-3">
+                <div class="panel panel-primary">
+            	    
+				    <div class="panel-body">
+					    <p style="text-align: center; font-size: 20px; font-weight: bold;">@ViewBag.totalPublishedPost</p>
+				    </div>
+
+                    <div class="panel-footer">
+				        <div class="panel-title text-center"> Published Post </div>
+				    </div>
+
+			    </div>
+           </div>
+
+          <div class="col-md-3">
+                <div class="panel panel-primary">
+				    <div class="panel-body">
+					    <p style="text-align: center; font-size: 20px; font-weight: bold;">@ViewBag.totalPendingPost</p>
+				    </div>
+                    <div class="panel-footer">
+				        <div class="panel-title text-center"> Pending Post </div>
+				    </div>
+			    </div>
+           </div>
+
+          <div class="col-md-3">
+                <div class="panel panel-primary">
+				    <div class="panel-body">
+					    <p style="text-align: center; font-size: 20px; font-weight: bold;">@ViewBag.TotalHouseOwner</p>
+				    </div>
+                    <div class="panel-footer">
+				        <div class="panel-title text-center"> House Owner </div>
+				    </div>
+			    </div>
+           </div>
+
+          <div class="col-md-3">
+                <div class="panel panel-primary">
+				    <div class="panel-body">
+					    <p style="text-align: center; font-size: 20px; font-weight: bold;">@ViewBag.totalRenter</p>
+				    </div>
+                    <div class="panel-footer">
+				        <div class="panel-title text-center"> Renter </div>
+				    </div>
+			    </div>
+           </div>
+      </div>
+    </div>
+</div>

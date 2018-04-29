@@ -1,0 +1,145 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+    <title>Admin Panel</title>
+   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="admin.js"></script>
+
+	
+</head>
+<body>
+
+  <script type="text/javascript"> 
+
+    var user = JSON.parse(sessionStorage.user);
+
+
+     $("body").delegate('.btn-danger', 'click', function(){
+
+        var id = $(this).val();
+          $.ajax({ 
+              url: 'http://localhost:2532/api/users/'+id,
+              type: 'DELETE',
+                headers:{
+            Authorization:'Basic '+btoa(user.Email+':'+user.Password)
+          },
+                complete: function(xmlhttp, status) {
+                  if(xmlhttp.status==204){
+                    
+                    alert('User Deleted!!');
+                    window.location.href = "allUsers.html";
+
+                  }
+                    
+                }
+            });
+     });
+
+    
+  </script>
+
+	<div class="container">
+		
+		<nav style="background-color: #fff;border-color: #1e88e5;border-width: 2px; text-decoration-color:#fff;" class="navbar navbar-default">
+
+	        <div class="container-fluid">
+	            
+	            <div class="navbar-header">
+	            	<div class="col-md-12">
+	            		<a style="text-decoration:none;" href="index.html"><h1 style="font-size:50px;">To Let BD</h1></a>
+	            	</div>
+	            </div>
+
+	            
+			   <ul class="nav navbar-nav navbar-right">
+            <li><a id="userName" href="profile.html"><span class="glyphicon glyphicon-user"></span> Nahid </a></li>
+            <li><button style="padding: 15px; margin: 0px; border: none;" id="logout"><a><span class="glyphicon glyphicon-log-in"></span> Logout</a></button></li>
+          </ul>
+	               
+
+	        </div>
+		</nav>
+		<div class="Main_body">
+			<div class="row">
+				<div class="col-md-3 col-sm-12">
+					<div class="panel panel-primary" >
+		                <div class="panel-heading">
+		                    <div class="panel-title"> Menu </div>
+		                </div> 
+					    <div class="panel-body">
+					   		 
+				            <div class="row">
+				            	<a href="admin.html" class="list-group-item"><span class="glyphicon glyphicon-certificate"></span>&nbsp; Dashboard</a>
+
+                        <a href="allPublishedPost.html" class="list-group-item"><span class="glyphicon glyphicon-certificate"></span>&nbsp; Published Posts</a>
+
+                        <a href="allPendingPost.html" class="list-group-item"><span class="glyphicon glyphicon-certificate"></span>&nbsp; Pending Posts</a>
+
+                        <a href="allUsers.html" class="list-group-item"><span class="glyphicon glyphicon-certificate"></span>&nbsp; Users</a>
+
+				               
+				            </div>
+        
+						</div>
+					</div>
+				</div>
+
+			      
+
+<div class="col-md-9 col-sm-12">
+	
+	<div class="panel panel-info" >
+        <div class="panel-heading">
+            <div class="panel-title">All Users </div>
+        </div> 
+	    <div  class="panel-body">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                  <div class="col-md-6 col-sm-12">
+                         
+                    <div class="col-md-8">
+                              <select id="userSearchBox" class="form-control" name="userTypeId" >
+                                <option value="0">Search By User Type</option>
+                                <option value="1">Admin</option>
+                                <option value="2">House Owner</option>
+                                
+                              </select>
+                          </div>
+                          <div class="col-md-4">
+                              <button class="btn btn-md btn-primary btn-block" id="searchUserBtn">Search</button> 
+                          </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="userList"></div>
+             
+
+            
+
+            
+
+		</div>
+	
+	</div>
+</div>
+
+				
+			</div>
+		</div>
+	</div>
+
+  
+
+	
+	
+	
+
+</body>
+</html>
